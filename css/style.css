@@ -209,3 +209,12 @@ body {
         max-width: 100%;
     }
 }
+
+/* Keep the filter dropdown flush right whether the count badge is shown or hidden */
+#combinedFilterDropdown + .dropdown-menu {
+    left: auto !important;
+    right: 0 !important;
+    transform: none !important;
+    top: 100% !important;
+    margin-top: 0.25rem;
+}
