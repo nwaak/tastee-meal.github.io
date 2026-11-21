@@ -49,7 +49,7 @@
                             <span>Filters</span>
 
                             <!-- Active Filter Dot Indicator -->
-                            <span id="filterActiveBadge" class="position-absolute bg-primary rounded-circle d-none" style="width: 8px; height: 8px; top: 5px; right: 5px;"></span>
+                            <span id="filterActiveCount" class="badge badge-category ml-2 d-none" style="padding: 0.25em 0.55em;">0</span>
                         </button>
 
                         <div class="dropdown-menu dropdown-menu-right p-3 shadow-sm" aria-labelledby="combinedFilterDropdown" style="min-width: 260px;">
@@ -137,7 +137,8 @@
         const authorButtons = document.querySelectorAll('#authorFilterGroup .btn');
         const cards = document.querySelectorAll('.recipe-item');
         const recipeCount = document.getElementById('recipeCount');
-        const filterActiveBadge = document.getElementById('filterActiveBadge');
+        const filterActiveCount = document.getElementById('filterActiveCount');
+        const combinedFilterDropdown = document.getElementById('combinedFilterDropdown');
         const resetFiltersBtn = document.getElementById('resetFiltersBtn');
         const dropdownMenu = document.querySelector('.dropdown-menu');
 
@@ -149,10 +150,18 @@
         });
 
         function updateFilterBadge(category, author) {
-            if (category !== 'all' || author !== 'all') {
-                filterActiveBadge.classList.remove('d-none');
+            let activeCount = 0;
+            if (category !== 'all') activeCount++;
+            if (author !== 'all') activeCount++;
+
+            if (activeCount > 0) {
+                filterActiveCount.textContent = activeCount;
+                filterActiveCount.classList.remove('d-none');
+                combinedFilterDropdown.classList.add('has-active-filters');
             } else {
-                filterActiveBadge.classList.add('d-none');
+                filterActiveCount.textContent = '0';
+                filterActiveCount.classList.add('d-none');
+                combinedFilterDropdown.classList.remove('has-active-filters');
             }
         }
 
