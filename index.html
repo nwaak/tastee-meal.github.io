@@ -13,44 +13,46 @@
     <main class="container my-4 my-lg-5">
         
         <!-- Header & Filter Controls -->
-        <div class="row mb-4 align-items-end">
+        <div class="row mb-4">
             
-            <div class="col-lg-8 mb-3 mb-lg-0 order-lg-12">
-                <div class="d-flex justify-content-lg-end align-items-center">
-                    <!-- Search Input -->
-                    <div class="flex-grow-1 flex-sm-grow-0 mr-2" style="min-width: 220px;">
+            <!-- Search & Filter Toolbar (above "All Recipes" and count) -->
+            <div class="col-12 mb-3">
+                <div class="d-flex align-items-center">
+                    <!-- Full-Width Search Input -->
+                    <div class="flex-grow-1 mr-2">
                         <input
                             type="text"
                             id="recipeSearch"
-                            class="form-control form-control"
-                            style="height: 35px;"
+                            class="form-control"
+                            style="height: 38px;"
                             enterkeyhint="search"
-                            placeholder="Search recipes..."
+                            placeholder="Search recipes for pancakes, muffins..."
                         >
                     </div>
 
                     <!-- Combined Filter Dropdown -->
                     <div class="dropdown">
-                        <button 
-                            class="btn btn-outline-secondary btn-sm d-flex align-items-center justify-content-center position-relative" 
-                            type="button" 
-                            id="combinedFilterDropdown" 
-                            data-toggle="dropdown" 
-                            aria-haspopup="true" 
+                        <button
+                            class="btn btn-outline-secondary d-flex align-items-center justify-content-center position-relative px-3"
+                            type="button"
+                            id="combinedFilterDropdown"
+                            data-toggle="dropdown"
+                            aria-haspopup="true"
                             aria-expanded="false"
-                            style="height: 35px; width: 38px;"
+                            style="height: 38px;"
                             title="Filter recipes"
                         >
                             <!-- Sliders-H SVG Icon -->
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="16" height="16" fill="currentColor" aria-hidden="true">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="16" height="16" fill="currentColor" class="mr-2" aria-hidden="true">
                                 <path d="M496 384H160v-16c0-8.8-7.2-16-16-16h-32c-8.8 0-16 7.2-16 16v16H16c-8.8 0-16 7.2-16 16v32c0 8.8 7.2 16 16 16h80v16c0 8.8 7.2 16 16 16h32c8.8 0 16-7.2 16-16v-16h336c8.8 0 16-7.2 16-16v-32c0-8.8-7.2-16-16-16zm0-160h-80v-16c0-8.8-7.2-16-16-16h-32c-8.8 0-16 7.2-16 16v16H16c-8.8 0-16 7.2-16 16v32c0 8.8 7.2 16 16 16h336v16c0 8.8 7.2 16 16 16h32c8.8 0 16-7.2 16-16v-16h80c8.8 0 16-7.2 16-16v-32c0-8.8-7.2-16-16-16zm0-160H288V48c0-8.8-7.2-16-16-16h-32c-8.8 0-16 7.2-16 16v16H16C7.2 64 0 71.2 0 80v32c0 8.8 7.2 16 16 16h208v16c0 8.8 7.2 16 16 16h32c8.8 0 16-7.2 16-16v-16h208c8.8 0 16-7.2 16-16V80c0-8.8-7.2-16-16-16z"/>
                             </svg>
+                            <span>Filters</span>
+
                             <!-- Active Filter Dot Indicator -->
-                            <span id="filterActiveBadge" class="position-absolute bg-primary rounded-circle d-none" style="width: 8px; height: 8px; top: 4px; right: 4px;"></span>
+                            <span id="filterActiveBadge" class="position-absolute bg-primary rounded-circle d-none" style="width: 8px; height: 8px; top: 5px; right: 5px;"></span>
                         </button>
 
                         <div class="dropdown-menu dropdown-menu-right p-3 shadow-sm" aria-labelledby="combinedFilterDropdown" style="min-width: 260px;">
-                            
                             <!-- Creator / Author Section -->
                             <div class="mb-3">
                                 <label class="small font-weight-bold text-uppercase text-muted mb-2 d-block">Creator</label>
@@ -81,14 +83,13 @@
                             <div class="border-top pt-2 text-right">
                                 <button type="button" class="btn btn-link btn-sm text-muted p-0" id="resetFiltersBtn">Reset filters</button>
                             </div>
-
                         </div>
                     </div>
                 </div>
             </div>
             
-            <div class="col-lg-4 order-lg-1">
-                <div class="d-flex justify-content-between align-items-baseline flex-sm-column align-items-sm-start">
+            <div class="col-12">
+                <div class="d-flex justify-content-between align-items-baseline">
                     <h1 class="h3 font-weight-bold mb-1">All Recipes</h1>
                     {% assign total_recipes = site.recipes | size %}
                     <p class="text-muted small mb-0" id="recipeCount">Showing {{ total_recipes }} {% if total_recipes == 1 %}recipe{% else %}recipes{% endif %}</p>
