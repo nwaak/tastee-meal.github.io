@@ -234,3 +234,7 @@ body {
     top: 100% !important;
     margin-top: 0.25rem;
 }
+
+.form-control {
+    border-radius: 20rem;
+}
