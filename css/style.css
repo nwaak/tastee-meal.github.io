@@ -17,6 +17,21 @@ body {
     color: var(--text-dark);
 }
 
+.btn {
+    border-radius: 20rem;
+    text-transform: uppercase;
+    font-size: .9rem;
+    padding: .5rem 1.35rem;
+}
+
+.btn-link {
+    color: var(--brand-green);
+}
+
+.btn-link:hover {
+    color: var(--brand-green-dark);
+}
+
 /* Navbar Styling matching the reference image */
 .navbar-custom {
     background-color: var(--brand-green);
