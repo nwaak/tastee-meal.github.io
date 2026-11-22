@@ -65,17 +65,6 @@
                         </button>
 
                         <div class="dropdown-menu dropdown-menu-right p-3 shadow-sm" aria-labelledby="combinedFilterDropdown" style="min-width: 260px;">
-                            <!-- Creator / Author Section -->
-                            <div class="mb-3">
-                                <label class="small font-weight-bold text-uppercase text-muted mb-2 d-block">Creator</label>
-                                <select class="form-control form-control-sm" id="authorFilterGroup" aria-label="Filter by creator">
-                                    <option value="all" selected>All</option>
-                                    <option value="laura">Laura</option>
-                                    <option value="grandma">Grandma</option>
-                                    <option value="nolan">Nolan</option>
-                                </select>
-                            </div>
-
                             <!-- Category Section -->
                             <div class="mb-3">
                                 <label for="categoryFilter" class="small font-weight-bold text-uppercase text-muted mb-2 d-block">Category</label>
@@ -90,7 +79,16 @@
                                     {% endfor %}
                                 </select>
                             </div>
-
+                            <!-- Creator / Author Section -->
+                            <div class="mb-3">
+                                <label class="small font-weight-bold text-uppercase text-muted mb-2 d-block">Creator</label>
+                                <select class="form-control form-control-sm" id="authorFilterGroup" aria-label="Filter by creator">
+                                    <option value="all" selected>All</option>
+                                    <option value="laura">Laura</option>
+                                    <option value="grandma">Grandma</option>
+                                    <option value="nolan">Nolan</option>
+                                </select>
+                            </div>
                             <!-- Reset Link -->
                             <div class="border-top pt-2 text-right">
                                 <button type="button" class="btn btn-link btn-sm text-muted p-0" id="resetFiltersBtn">Reset filters</button>
