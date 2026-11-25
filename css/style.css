@@ -238,3 +238,13 @@ body {
 .form-control {
     border-radius: 20rem;
 }
+
+/* Column Borders */
+.col-br-1 {
+    border-right: 1px solid #e1e1ff;
+}
+@media (min-width: 576px) {
+    .col-br-sm-1 {
+        border-right: 1px solid #e1e1ff;
+    }
+}
