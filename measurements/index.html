@@ -1,0 +1,142 @@
+---
+---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% include head.html %}
+</head>
+<body>
+
+    {% include nav.html %}
+
+    <!-- Main Container -->
+    <main class="container my-4 my-lg-5">
+        
+        <!-- Interactive Converter -->
+        <div class="card mb-4">
+            <div class="card-body">
+                <h5 class="card-title">Volume Converter</h5>
+                <form id="converter-form" class="form-row align-items-end">
+                    <div class="col-12 col-sm-3 mb-2 mb-sm-0">
+                        <label for="amount" class="small font-weight-bold">Amount</label>
+                        <input
+                            type="text"
+                            inputmode="decimal"
+                            class="form-control"
+                            id="amount"
+                            value="1"
+                            placeholder="e.g. 1 1/2"
+                            enterkeyhint="done" />
+                    </div>
+                    <div class="col-6 col-sm-4 mb-2 mb-sm-0">
+                        <label for="from-unit" class="small font-weight-bold">From</label>
+                        <select class="form-control" id="from-unit">
+                            <option value="tsp">Teaspoons (tsp)</option>
+                            <option value="tbsp">Tablespoons (tbsp)</option>
+                            <option value="floz">Fluid Ounces (fl oz)</option>
+                            <option value="cup" selected>Cups</option>
+                            <option value="pint">Pints</option>
+                            <option value="quart">Quarts</option>
+                            <option value="ml">Milliliters (ml)</option>
+                        </select>
+                    </div>
+                    <div class="col-6 col-sm-5">
+                        <label for="to-unit" class="small font-weight-bold">To</label>
+                        <select class="form-control" id="to-unit">
+                            <option value="tsp">Teaspoons (tsp)</option>
+                            <option value="tbsp" selected>Tablespoons (tbsp)</option>
+                            <option value="floz">Fluid Ounces (fl oz)</option>
+                            <option value="cup">Cups</option>
+                            <option value="pint">Pints</option>
+                            <option value="quart">Quarts</option>
+                            <option value="ml">Milliliters (ml)</option>
+                        </select>
+                    </div>
+                </form>
+                <div class="mt-3 p-2 bg-light border rounded text-center">
+                    <span class="h5 mb-0" id="conversion-result">1 Cup = 16 Tablespoons</span>
+                </div>
+            </div>
+        </div>
+
+    <script>
+        const ratesInTsp = {
+            tsp: 1,
+            tbsp: 3,
+            floz: 6,
+            cup: 48,
+            pint: 96,
+            quart: 192,
+            ml: 0.202884
+        };
+
+        const amountInput = document.getElementById("amount");
+        const fromSelect = document.getElementById("from-unit");
+        const toSelect = document.getElementById("to-unit");
+        const resultDisplay = document.getElementById("conversion-result");
+
+        // Parses decimals ("1.5"), simple fractions ("3/4"), and mixed numbers ("1 1/2" or "1-1/2")
+        function parseAmount(input) {
+            const cleaned = input.trim().replace("-", " ");
+            if (!cleaned) return NaN;
+
+            // Split by whitespace to separate whole numbers from fractions
+            const parts = cleaned.split(/\s+/);
+            let total = 0;
+
+            for (const part of parts) {
+                if (part.includes("/")) {
+                    const fraction = part.split("/");
+                    if (fraction.length !== 2) return NaN;
+                    const numerator = parseFloat(fraction[0]);
+                    const denominator = parseFloat(fraction[1]);
+                    if (isNaN(numerator) || isNaN(denominator) || denominator === 0) return NaN;
+                    total += numerator / denominator;
+                } else {
+                    const num = parseFloat(part);
+                    if (isNaN(num)) return NaN;
+                    total += num;
+                }
+            }
+
+            return total;
+        }
+
+        function updateConversion() {
+            const rawInput = amountInput.value;
+            const amount = parseAmount(rawInput);
+
+            if (isNaN(amount) || amount < 0) {
+                resultDisplay.textContent = "Enter a valid amount (e.g. 1.5 or 1 1/2)";
+                return;
+            }
+
+            const fromUnit = fromSelect.value;
+            const toUnit = toSelect.value;
+
+            const inTsp = amount * ratesInTsp[fromUnit];
+            const converted = inTsp / ratesInTsp[toUnit];
+            const formattedResult = Number(converted.toFixed(2));
+
+            const fromText = fromSelect.options[fromSelect.selectedIndex].text.split(" (")[0];
+            const toText = toSelect.options[toSelect.selectedIndex].text.split(" (")[0];
+
+            // Echo back the user's trimmed input (e.g., "1/2") rather than converting it to "0.5"
+            resultDisplay.textContent = `${rawInput.trim()} ${fromText} = ${formattedResult} ${toText}`;
+        }
+
+        amountInput.addEventListener("input", updateConversion);
+        fromSelect.addEventListener("change", updateConversion);
+        toSelect.addEventListener("change", updateConversion);
+
+        document.getElementById("converter-form").addEventListener("submit", function (e) {
+            e.preventDefault();
+            amountInput.blur();
+        });
+    </script>
+        
+    </main>
+
+    {% include footer.html %}
+</body>
+</html>
