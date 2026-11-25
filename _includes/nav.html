@@ -1,8 +1,8 @@
 <!-- Navbar -->
 <nav class="navbar navbar-expand-md navbar-dark navbar-custom">
     <div class="container">
-        <a class="navbar-brand" href="/">
-            <img class="img-fluid" src="/images/logo-tasteemeal.svg">
+        <a class="navbar-brand" href="{{ '/' | relative_url }}">
+            <img class="img-fluid" src="{{ '/images/logo-tasteemeal.svg' | relative_url }}">
         </a>
         <button class="navbar-toggler my-2" type="button" data-toggle="collapse" data-target="#mainNav">
             <span class="navbar-toggler-icon"></span>
@@ -10,11 +10,11 @@
 
         <div class="collapse navbar-collapse" id="mainNav">
             <ul class="navbar-nav ml-4">
-                <li class="nav-item active">
-                    <a class="nav-link" href="/">Recipes</a>
+                <li class="nav-item {% if page.url == '/' or page.url == '/index.html' or page.collection == 'recipes' %}active{% endif %}">
+                    <a class="nav-link" href="{{ '/' | relative_url }}">Recipes</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/measurements">Measurements</a>
+                <li class="nav-item {% if page.url contains '/measurements' %}active{% endif %}">
+                    <a class="nav-link" href="{{ '/measurements' | relative_url }}">Measurements</a>
                 </li>
                 <!--<li class="nav-item">
                     <a class="nav-link" href="#prep">Kitchen Prep</a>
