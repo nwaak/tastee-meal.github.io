@@ -33,6 +33,10 @@ body {
     border-color: var(--brand-green);
 }
 
+.bg-success {
+    background-color: var(--brand-green)!important;
+}
+
 /* Navbar Styling matching the reference image */
 .navbar-custom {
     background-color: var(--brand-green);
